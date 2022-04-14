@@ -13,9 +13,9 @@ build: dep
 	go build ./...
 	go test ./...
 	mkdir -p build/Darwin
-	go build -a -installsuffix cgo -ldflags "$(LDFLAGS)-X main.Version=$(VERSION)" -o build/Darwin/entrykit ./cmd
+	CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags "$(LDFLAGS)-X main.Version=$(VERSION)" -o build/Darwin/entrykit ./cmd
 	mkdir -p build/Linux
-	go build -a -installsuffix cgo -ldflags "$(LDFLAGS)-X main.Version=$(VERSION)" -o build/Linux/entrykit ./cmd
+	CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags "$(LDFLAGS)-X main.Version=$(VERSION)" -o build/Linux/entrykit ./cmd
 
 dep:
 	GO111MODULE=on go mod tidy
